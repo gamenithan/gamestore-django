@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block  content %}
+{% load static %}
+<div class="container">
+<div style="text-align: right;">
+    <form class="form-inline my-2 my-lg-0"  method="POST" action="{% url 'userlib' %}">
+    {% csrf_token %}
+                <input class="form-control mr-sm-2 btn-outline-light ser"  name="search" type="text" placeholder="Search" value="">
+                {% comment %} <button class="btn btn-outline-dark my-2 my-sm-0 bg-warning" type="submit">Search</button> {% endcomment %}
+                <br>
+            </form>
+            <div>
+            <br>
+                </div>
+    </div>
+    </div>
+<div class="container bg-secondary ">
+<div class="row row-cols-5" style="padding: 10px;">
+    {% for game in games %}
+    {% for img in imgs %}
+    {% if img.game_id == game.game_id %}
+    
+    {% comment %} <div class=" card-body mb-4 p-2" style="width: 12rem; margin:4px">
+    <img class="card shadow p-2 mb-3 bg-white rounded" style="width: 15rem; height: 20rem;"
+    src="{{ img.Image_url.url }}" alt="">
+    <div class="">
+    <p class="card-text" style="color: white;" > {{ game.game_id.name }}</p>
+    <p class="card-text" style="color: white;" > {{ game.purchased_date }}</p>
+    <p class="card-text" style="color: white;" > {{ game.serial }}</p>
+    </div>
+    </div> {% endcomment %}
+
+    <div class="card mb-4 card-body p-2" style="width: 12rem; margin:4px"
+            data-keywords="Steam Wallet, Steam, Steam Wallet Code, Steam Digital Wallet Code">
+            <div class="pam bg-white">
+                <a href="#" title="Steam Wallet THB">
+                    <img src="{{ img.Image_url.url }}" alt="Steam Wallet THB" class="card-img-top item"  style="width: 15rem; height: 15rem;">
+                </a>
+                <div class="mbm mtm font-size-16"> 
+                <h5 class="card-text" > {{ game.game_id.name }}</h5>
+                <p class="card-text" >วันที่ซื้อ :{{ game.purchased_date }}</p>
+                <p class="card-text" > serial number :{{ game.serial }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+</div>
+
+
+
+
+{% endblock %}

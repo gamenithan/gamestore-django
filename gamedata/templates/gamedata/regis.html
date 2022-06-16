@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block  content %}
+{% load static %}
+    <div class="container">
+
+            <h3 class="page-header mtl">
+                สมัครสมาชิก </h3>
+            <form action="{% url 'sign' %}" method="POST" accept-charset="utf-8">
+                {% csrf_token %}
+                <!-- <div style="display:none">
+                    <input type="hidden" name="csrf_token_name" value="4baaa063c760b844835c0673bbf70ada">
+                </div> -->
+                <div class="form-group">
+                    <label for="username">username</label>
+                    <input type="text" name="username" class="form-control" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">password</label>
+                    <input type="password" name="password" class="form-control" id="password" required> 
+                </div>
+                <div class="form-group">
+                    <label for="password2">confirm password</label>
+                    <input type="password" name="password2" class="form-control" id="password2" required>
+                </div>
+                <div class="form-group">
+                    <label for="first_name">first_name</label>
+                    <input type="text" name="first_name" class="form-control" id="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">last_name</label>
+                    <input type="text" name="last_name" class="form-control" id="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">อีเมลล์</label>
+                    <input type="text" name="email" class="form-control" id="email" required>
+                </div>
+                {% if error %}
+                <span style="color: red;">{{ error }}</span>
+                {% endif %}
+                <hr>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Success</button>
+                </div>
+            </form>
+            </div>
+    {% endblock  %}

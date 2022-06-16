@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block  content %}
+{% load static %}
+<style>
+    body{
+    margin-top:20px;
+    background:#f8f8f8
+}
+</style>
+<div class="container">
+<div class="row flex-lg-nowrap">
+  <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{ user.username }}</h4>
+                    <p class="mb-0">{{ user.first_name }} {{ user.last_name }}</p>
+                    <div class="text-muted"><small>{{ user.last_login }}</small></div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <div class="mt-2">
+                      {% comment %} <button class="btn btn-primary" type="button">
+                        <i class="fa fa-fw fa-camera"></i>
+                        <span>Change Photo</span>
+                      </button> {% endcomment %}
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    {% comment %} <span class="badge badge-secondary">administrator</span>
+                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div> {% endcomment %}
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form method="POST" action="{% url 'editaf' %}">
+                  {% csrf_token %}
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              <input class="form-control" type="text" name="first_name" value="{{ user.first_name }}">
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Last Name</label>
+                              <input class="form-control" type="text" name="last_name" value="{{ user.last_name }}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input class="form-control" type="text" name="username" value="{{ user.username }}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input class="form-control" type="text" name="email" value="{{ user.email }}">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}

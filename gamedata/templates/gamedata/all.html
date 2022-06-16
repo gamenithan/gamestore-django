@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block  content %}
+{% load static %}
+<title>HOME</title>
+<style>
+    .w-20 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 20% !important;
+        flex: 0 0 20% !important;
+        max-width: 20%;
+    }
+    .item {
+    width: 250px;
+    min-height: 150px;
+    max-height: auto;
+}
+</style>
+
+<div class="w3-sidebar w3-bar-block " style="width:15%;right:0">
+    <!-- <aside class="col-sm-4"> -->
+    <header class="card-header bg-danger">
+                <h6 class="title" style=color:white;>Filter</h6>
+    </header>
+    &nbsp;
+    &nbsp;
+    <div class="container">
+    <form class="form-inline my-2 my-lg-0"  method="POST" action="{% url 'all' %}">
+    {% csrf_token %}
+                <input class="form-control mr-sm-2 btn-outline-light ser"  name="search" type="text" placeholder="Search" value="">
+                {% comment %} <button class="btn btn-outline-dark my-2 my-sm-0 bg-warning" type="submit">Search</button> {% endcomment %}
+                <br>
+            </form>
+            <div>
+            <br>
+                </div>
+    </div>
+    <!-- <aside class="col-sm-4"> -->
+
+    <div class="card">
+        <article class="card-group-item">
+            <header class="card-header bg-danger">
+                <h6 class="title" style=color:white;>Game Type</h6>
+            </header>
+            <div class="filter-content">
+                <div class="card-body">
+                    <form method="POST" action="{% url 'filter' %}">
+                    {% csrf_token %}
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="openworld" onchange="this.form.submit()" name="game_type">
+                            <span class="form-check-label">
+                                openworld              
+                            </span>
+                        </label> <!-- form-check.// -->
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="RPG" onchange="this.form.submit()" name="game_type">
+                            <span class="form-check-label">
+                                RPG
+                            </span>
+                        </label> <!-- form-check.// -->
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="FPS" onchange="this.form.submit()" name="game_type">
+                            <span class="form-check-label">
+                                FPS
+                            </span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="action" onchange="this.form.submit()" name="game_type">
+                            <span class="form-check-label">
+                                Action
+                            </span>
+                        </label> <!-- form-check.// -->
+                    </form>
+
+                </div> <!-- card-body.// -->
+            </div>
+        </article> <!-- card-group-item.// -->
+    </div> <!-- card.// -->
+
+
+
+
+    <!-- </aside> col.// -->
+</div>
+<div class="container" style="margin-right:20%"\>
+    <h2 class="lead mtn mbl">
+        AllGame <small class="text-color">–</small>
+    </h2> 
+    
+    <div class="row row-cols-5">
+
+        <!-- <div class="card-deck"> -->
+        {% for game, img in result %}
+        <div class="card mb-4 card-body p-2" style="width: 18rem;"
+            data-keywords="Steam Wallet, Steam, Steam Wallet Code, Steam Digital Wallet Code">
+            <div class="pam bg-white">
+                <a href="/../list/{{ game.id }}" title="Steam Wallet THB">
+                    <img src="{{ img.Image_url.url }}" alt="Steam Wallet THB" class="card-img-top item" href="/../list/{{ game.id }}">
+                </a>
+                <div class="mbm mtm font-size-16"> 
+                <p>
+                    {{ game.name }}
+                </P>
+                <p>
+                    {{ game.price }} ฿
+                </P>
+                </div>
+                <a href="/../list/{{ game.id }}" class="btn btn-success btn-block btn-embossed" title="Steam Wallet THB">
+                    ดูข้อมูล </a>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+    </div>
+</div>
+
+{% endblock  %}
